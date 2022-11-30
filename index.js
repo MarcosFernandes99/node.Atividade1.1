@@ -1,16 +1,28 @@
-// console.log("Olá mundo")
-// let validator = require('validator');
-// console.log(validator.isEmail('foo@bar.com'));
-
 const readXlsxFile = require('read-excel-file/node')
 
 readXlsxFile("./Alunos.xlsx").then((rows) => {
 
-    for (let index = 1; index < rows.length; index++) {
-        
-        console.log(`Nome: ${rows[index][0]} Email: ${rows[index][1]} Idade: ${rows[index][2]} Matrícula: ${rows[index][3]}`)
+    for (let i = 1; i < rows.length; i++) {
 
+        let validator = require('validator');
+
+        // VERIFICANDO NOME
+        if (rows[i][0] == null){
+            console.log('nome inválido')}
+        else{
+            !validator.isEmpty(rows[i][0]) ? console.log(rows[i][0]) : console.log('nome inválido')
+        }         
+            
+        // VERIFICANDO EMAIL
+        validator.isEmail(rows[i][1]) ? console.log(rows[i][1]) : console.log('email inválido')
+
+        // VERIFICANDO IDADE
+        rows[i][2] > 0 ? console.log(rows[i][2]) : console.log('idade inválida')
+
+        // VERIFICANDO MATRÍCULA
+        validator.isAlphanumeric(rows[i][3]) ? console.log(rows[i][3]) : console.log('matrícula inválida')
+
+        console.log('')
     }
-
 })
 
